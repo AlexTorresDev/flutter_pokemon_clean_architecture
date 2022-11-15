@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_pokemon_clean_architecture/ui/bloc/pokemon_event.dart';
-import 'package:flutter_pokemon_clean_architecture/ui/bloc/pokemon_state.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:flutter_pokemon_clean_architecture/domain/use_cases/get_pokemon.dart';
+import 'pokemon_event.dart';
+import 'pokemon_state.dart';
 
 class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
   final GetPokemon getPokemon;

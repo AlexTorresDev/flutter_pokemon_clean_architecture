@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pokemon_clean_architecture/domain/entities/pokemon.dart';
-import 'package:flutter_pokemon_clean_architecture/ui/bloc/pokemon_bloc.dart';
-import 'package:flutter_pokemon_clean_architecture/ui/bloc/pokemon_event.dart';
-import 'package:flutter_pokemon_clean_architecture/ui/bloc/pokemon_state.dart';
+import 'package:flutter_pokemon_clean_architecture/ui/blocs/blocs.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

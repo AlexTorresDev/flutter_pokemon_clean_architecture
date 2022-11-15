@@ -1,4 +1,4 @@
-import 'package:flutter_pokemon_clean_architecture/ui/bloc/pokemon_bloc.dart';
+import 'package:flutter_pokemon_clean_architecture/ui/blocs/pokemon/pokemon_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 
@@ -7,25 +7,25 @@ import 'package:flutter_pokemon_clean_architecture/data/repositories/pokemon_rep
 import 'package:flutter_pokemon_clean_architecture/domain/repositories/pokemon_repository.dart';
 import 'package:flutter_pokemon_clean_architecture/domain/use_cases/get_pokemon.dart';
 
-final sl = GetIt.instance;
+final injector = GetIt.instance;
 
 void init() {
   // BLoC
-  sl.registerFactory(() => PokemonBloc(sl()));
+  injector.registerFactory(() => PokemonBloc(injector()));
 
   // Use case
-  sl.registerLazySingleton(() => GetPokemon(sl()));
+  injector.registerLazySingleton(() => GetPokemon(injector()));
 
   // Repository
-  sl.registerLazySingleton<PokemonRepository>(() => PokemonRepositoryImpl(
-        remoteDataSource: sl(),
+  injector.registerLazySingleton<PokemonRepository>(() => PokemonRepositoryImpl(
+        remoteDataSource: injector(),
         //localDataSource: sl(),
       ));
 
   // Data sources
-  sl.registerLazySingleton<RemoteDataSource>(
-      () => RemoteDataSourceImpl(client: sl()));
+  injector.registerLazySingleton<RemoteDataSource>(
+      () => RemoteDataSourceImpl(client: injector()));
 
   // Core
-  sl.registerLazySingleton(() => http.Client());
+  injector.registerLazySingleton(() => http.Client());
 }

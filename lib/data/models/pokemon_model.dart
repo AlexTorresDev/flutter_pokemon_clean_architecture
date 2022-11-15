@@ -1,26 +1,25 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter_pokemon_clean_architecture/domain/entities/pokemon.dart';
 
-class PokemonModel extends Equatable {
+class PokemonModel extends Pokemon {
   const PokemonModel({
-    this.baseExperience,
-    this.height,
-    this.id,
-    this.isDefault,
-    this.locationAreaEncounters,
-    this.name,
-    this.order,
-    this.weight,
-  });
-
-  final int? baseExperience;
-  final int? height;
-  final int? id;
-  final bool? isDefault;
-  final String? locationAreaEncounters;
-  final String? name;
-  final int? order;
-  final int? weight;
+    int? baseExperience,
+    int? height,
+    int? id,
+    bool? isDefault,
+    String? locationAreaEncounters,
+    String? name,
+    int? order,
+    int? weight,
+  }) : super(
+          baseExperience: baseExperience,
+          height: height,
+          id: id,
+          isDefault: isDefault,
+          locationAreaEncounters: locationAreaEncounters,
+          name: name,
+          order: order,
+          weight: weight,
+        );
 
   factory PokemonModel.fromJson(Map<String, dynamic> json) => PokemonModel(
         baseExperience: json["base_experience"],
@@ -43,27 +42,4 @@ class PokemonModel extends Equatable {
         "order": order,
         "weight": weight,
       };
-
-  Pokemon toEntity() => Pokemon(
-        baseExperience: baseExperience,
-        height: height,
-        id: id,
-        isDefault: isDefault,
-        locationAreaEncounters: locationAreaEncounters,
-        name: name,
-        order: order,
-        weight: weight,
-      );
-
-  @override
-  List<Object?> get props => [
-        baseExperience,
-        height,
-        id,
-        isDefault,
-        locationAreaEncounters,
-        name,
-        order,
-        weight,
-      ];
 }
