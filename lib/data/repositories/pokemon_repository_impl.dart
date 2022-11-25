@@ -15,6 +15,18 @@ class PokemonRepositoryImpl implements PokemonRepository {
   });
 
   @override
+  Future<Either<Failure, List<Pokemon>>> getPokemonList() async {
+    try {
+      final result = await remoteDataSource.getPokemonList();
+      return Right(result);
+    } on ServerException {
+      return const Left(ServerFailure(''));
+    } on SocketException {
+      return const Left(ConnectionFailure('Failed to connect to the network'));
+    }
+  }
+
+  @override
   Future<Either<Failure, Pokemon>> getPokemon(String name) async {
     try {
       final result = await remoteDataSource.getPokemon(name);

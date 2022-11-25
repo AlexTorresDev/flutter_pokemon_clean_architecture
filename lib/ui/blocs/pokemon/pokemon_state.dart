@@ -29,3 +29,12 @@ class PokemonHasData extends PokemonState {
   @override
   List<Object?> get props => [result];
 }
+
+class PokemonHasList extends PokemonState {
+  const PokemonHasList(this.result);
+
+  final List<Pokemon> result;
+
+  @override
+  List<Object?> get props => [result];
+}

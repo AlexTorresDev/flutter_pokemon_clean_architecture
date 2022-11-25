@@ -1,3 +1,4 @@
+import 'package:flutter_pokemon_clean_architecture/domain/use_cases/get_pokemon_list.dart';
 import 'package:flutter_pokemon_clean_architecture/ui/blocs/pokemon/pokemon_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
@@ -11,9 +12,10 @@ final injector = GetIt.instance;
 
 void init() {
   // BLoC
-  injector.registerFactory(() => PokemonBloc(injector()));
+  injector.registerFactory(() => PokemonBloc(injector(), injector()));
 
   // Use case
+  injector.registerLazySingleton(() => GetPokemonList(injector()));
   injector.registerLazySingleton(() => GetPokemon(injector()));
 
   // Repository

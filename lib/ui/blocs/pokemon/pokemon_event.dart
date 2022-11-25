@@ -7,6 +7,13 @@ abstract class PokemonEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+class OnGetAll extends PokemonEvent {
+  const OnGetAll();
+
+  @override
+  List<Object?> get props => [];
+}
+
 class OnNameChanged extends PokemonEvent {
   const OnNameChanged(this.name);
 

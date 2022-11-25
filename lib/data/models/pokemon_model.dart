@@ -1,3 +1,4 @@
+import 'package:flutter_pokemon_clean_architecture/data/models/sprite_model.dart';
 import 'package:flutter_pokemon_clean_architecture/domain/entities/pokemon.dart';
 
 class PokemonModel extends Pokemon {
@@ -10,6 +11,7 @@ class PokemonModel extends Pokemon {
     String? name,
     int? order,
     int? weight,
+    SpriteModel? sprites,
   }) : super(
           baseExperience: baseExperience,
           height: height,
@@ -19,6 +21,7 @@ class PokemonModel extends Pokemon {
           name: name,
           order: order,
           weight: weight,
+          sprites: sprites,
         );
 
   factory PokemonModel.fromJson(Map<String, dynamic> json) => PokemonModel(
@@ -30,6 +33,9 @@ class PokemonModel extends Pokemon {
         name: json["name"],
         order: json["order"],
         weight: json["weight"],
+        sprites: json["sprites"] != null
+            ? SpriteModel.fromJson(json["sprites"])
+            : null,
       );
 
   Map<String, dynamic> toJson() => {
@@ -41,5 +47,7 @@ class PokemonModel extends Pokemon {
         "name": name,
         "order": order,
         "weight": weight,
+        // TODO: Fix this
+        //"sprites": sprites!.toJson(),
       };
 }

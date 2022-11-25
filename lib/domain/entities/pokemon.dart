@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter_pokemon_clean_architecture/domain/entities/sprite.dart';
 
 class Pokemon extends Equatable {
   const Pokemon({
@@ -10,6 +11,7 @@ class Pokemon extends Equatable {
     this.name,
     this.order,
     this.weight,
+    this.sprites,
   });
 
   final int? baseExperience;
@@ -20,6 +22,7 @@ class Pokemon extends Equatable {
   final String? name;
   final int? order;
   final int? weight;
+  final Sprite? sprites;
 
   @override
   List<Object?> get props => [
@@ -31,5 +34,6 @@ class Pokemon extends Equatable {
         name,
         order,
         weight,
+        sprites,
       ];
 }
