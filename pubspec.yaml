@@ -44,6 +44,7 @@ dependencies:
   rxdart: ^0.27.6
   sqflite: ^2.2.0+3
   palette_generator: ^0.3.3+2
+  path: ^1.8.2
 
 dev_dependencies:
   flutter_test:

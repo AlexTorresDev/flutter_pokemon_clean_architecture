@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_pokemon_clean_architecture/core/errors/exceptions.dart';
+import 'package:flutter_pokemon_clean_architecture/data/data_sources/local_data_source.dart';
 import 'package:flutter_pokemon_clean_architecture/data/data_sources/remote_data_source.dart';
 import 'package:flutter_pokemon_clean_architecture/domain/entities/pokemon.dart';
 import 'package:flutter_pokemon_clean_architecture/core/errors/failure.dart';
@@ -9,16 +10,31 @@ import 'package:flutter_pokemon_clean_architecture/domain/repositories/pokemon_r
 
 class PokemonRepositoryImpl implements PokemonRepository {
   final RemoteDataSource remoteDataSource;
+  final LocalDataSource localDataSource;
 
   PokemonRepositoryImpl({
     required this.remoteDataSource,
+    required this.localDataSource,
   });
 
   @override
   Future<Either<Failure, List<Pokemon>>> getPokemonList() async {
     try {
-      final result = await remoteDataSource.getPokemonList();
-      return Right(result);
+      final localPokemonList = await localDataSource.getPokemonList();
+      print(localPokemonList);
+
+      if (localPokemonList.isEmpty) {
+        final remotePokemonList = await remoteDataSource.getPokemonList();
+        // save pokemon list to local data source
+        localDataSource.savePokemonList(remotePokemonList);
+        return Right(remotePokemonList);
+      } else {
+        return Right(localPokemonList);
+      }
+    } on CacheException {
+      return const Left(
+        DatabaseFailure('Failed to get pokemon list from cache'),
+      );
     } on ServerException {
       return const Left(ServerFailure(''));
     } on SocketException {

@@ -1,18 +1,14 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_pokemon_clean_architecture/domain/entities/pokemon.dart';
 import 'package:palette_generator/palette_generator.dart';
 
 class PokemonCard extends StatelessWidget {
-  PokemonCard({
+  const PokemonCard({
     Key? key,
     required this.pokemon,
   }) : super(key: key);
 
   final Pokemon pokemon;
-
-  final GlobalKey _cardKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +34,6 @@ class PokemonCard extends StatelessWidget {
           return ClipRRect(
             borderRadius: BorderRadius.circular(30),
             child: Card(
-              key: _cardKey,
               margin: const EdgeInsets.all(6),
               clipBehavior: Clip.antiAliasWithSaveLayer,
               elevation: 2,
