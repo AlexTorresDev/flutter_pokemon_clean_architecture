@@ -56,8 +56,10 @@ class _HomePageState extends State<HomePage> {
                       return PokemonCard(pokemon: pokemon);
                     },
                   );
+                } else if (state is PokemonError) {
+                  return Text('Error: ${state.message}');
                 } else {
-                  return const SizedBox.shrink();
+                  return const Text('No data');
                 }
               },
             ),

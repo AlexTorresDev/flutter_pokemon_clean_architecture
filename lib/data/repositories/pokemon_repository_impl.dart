@@ -47,17 +47,23 @@ class PokemonRepositoryImpl implements PokemonRepository {
       final localPokemon = await localDataSource.getPokemon(name);
 
       if (localPokemon.isEmpty) {
-        final remotePokemon = await remoteDataSource.getPokemon(name);
-        // save pokemon to local data source
-        localDataSource.savePokemonList(remotePokemon);
-        return Right(remotePokemon);
+        try {
+          final remotePokemon = await remoteDataSource.getPokemon(name);
+          localDataSource.savePokemonList(remotePokemon);
+          return Right(remotePokemon);
+        } on ServerException {
+          return const Left(ServerFailure('No data found'));
+        } on SocketException {
+          return const Left(
+              ConnectionFailure('Failed to connect to the network'));
+        }
       } else {
         return Right(localPokemon);
       }
-    } on ServerException {
-      return const Left(ServerFailure(''));
-    } on SocketException {
-      return const Left(ConnectionFailure('Failed to connect to the network'));
+    } on CacheException {
+      return const Left(
+        DatabaseFailure('Failed to get pokemon from cache'),
+      );
     }
   }
 }

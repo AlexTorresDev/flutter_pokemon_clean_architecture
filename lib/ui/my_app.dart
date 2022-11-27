@@ -8,6 +8,8 @@ import 'package:flutter_pokemon_clean_architecture/ui/pages/home/home_page.dart'
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  final Color _color = Colors.amber;
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -16,9 +18,26 @@ class MyApp extends StatelessWidget {
           create: (_) => di.injector<PokemonBloc>(),
         ),
       ],
-      child: const MaterialApp(
+      child: MaterialApp(
         title: 'Flutter Demo',
-        home: HomePage(),
+        home: const HomePage(),
+        theme: ThemeData(
+          primaryColor: _color,
+          colorScheme: ColorScheme.fromSwatch().copyWith(
+            secondary: _color,
+          ),
+          inputDecorationTheme: InputDecorationTheme(
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                color: _color,
+              ),
+            ),
+            prefixIconColor: _color,
+          ),
+          textSelectionTheme: TextSelectionThemeData(
+            cursorColor: _color,
+          ),
+        ),
       ),
     );
   }
