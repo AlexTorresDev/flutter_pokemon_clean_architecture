@@ -11,7 +11,7 @@ import 'package:flutter_pokemon_clean_architecture/ui/pages/home/home_page.dart'
       initial: true,
     ),
     AutoRoute(
-      path: '/details/:name',
+      path: '/details/:id',
       page: DetailsPage,
     ),
     /*AutoRoute(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_pokemon_clean_architecture/core/framework/utils/custom_shape_border.dart';
 import 'package:flutter_pokemon_clean_architecture/ui/blocs/blocs.dart';
 import 'package:flutter_pokemon_clean_architecture/ui/pages/home/widgets/pokemon_card.dart';
 
@@ -23,8 +22,6 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Pokemon'),
-        backgroundColor: Colors.orangeAccent,
-        shape: CustomShapeBorder(),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),

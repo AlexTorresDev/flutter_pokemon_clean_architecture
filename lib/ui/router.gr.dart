@@ -32,12 +32,12 @@ class AppRouter extends _i3.RootStackRouter {
     DetailsRoute.name: (routeData) {
       final pathParams = routeData.inheritedPathParams;
       final args = routeData.argsAs<DetailsRouteArgs>(
-          orElse: () => DetailsRouteArgs(name: pathParams.getString('name')));
+          orElse: () => DetailsRouteArgs(id: pathParams.getString('id')));
       return _i3.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i2.DetailsPage(
           key: args.key,
-          name: args.name,
+          id: args.id,
         ),
       );
     },
@@ -51,7 +51,7 @@ class AppRouter extends _i3.RootStackRouter {
         ),
         _i3.RouteConfig(
           DetailsRoute.name,
-          path: '/details/:name',
+          path: '/details/:id',
         ),
       ];
 }
@@ -73,15 +73,15 @@ class HomeRoute extends _i3.PageRouteInfo<void> {
 class DetailsRoute extends _i3.PageRouteInfo<DetailsRouteArgs> {
   DetailsRoute({
     _i4.Key? key,
-    required String name,
+    required String id,
   }) : super(
           DetailsRoute.name,
-          path: '/details/:name',
+          path: '/details/:id',
           args: DetailsRouteArgs(
             key: key,
-            name: name,
+            id: id,
           ),
-          rawPathParams: {'name': name},
+          rawPathParams: {'id': id},
         );
 
   static const String name = 'DetailsRoute';
@@ -90,15 +90,15 @@ class DetailsRoute extends _i3.PageRouteInfo<DetailsRouteArgs> {
 class DetailsRouteArgs {
   const DetailsRouteArgs({
     this.key,
-    required this.name,
+    required this.id,
   });
 
   final _i4.Key? key;
 
-  final String name;
+  final String id;
 
   @override
   String toString() {
-    return 'DetailsRouteArgs{key: $key, name: $name}';
+    return 'DetailsRouteArgs{key: $key, id: $id}';
   }
 }

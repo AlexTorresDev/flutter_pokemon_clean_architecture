@@ -8,13 +8,14 @@ import 'package:flutter_pokemon_clean_architecture/data/repositories/pokemon_rep
 import 'package:flutter_pokemon_clean_architecture/domain/repositories/pokemon_repository.dart';
 import 'package:flutter_pokemon_clean_architecture/domain/use_cases/get_pokemon.dart';
 import 'package:flutter_pokemon_clean_architecture/domain/use_cases/get_pokemon_list.dart';
-import 'package:flutter_pokemon_clean_architecture/ui/blocs/pokemon/pokemon_bloc.dart';
+import 'package:flutter_pokemon_clean_architecture/ui/blocs/blocs.dart';
 
 final injector = GetIt.instance;
 
 void init() {
   // BLoC
   injector.registerFactory(() => PokemonBloc(injector(), injector()));
+  injector.registerFactory(() => DetailsBloc(injector()));
 
   // Use case
   injector.registerLazySingleton(() => GetPokemonList(injector()));

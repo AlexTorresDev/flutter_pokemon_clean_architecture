@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_pokemon_clean_architecture/core/framework/utils/custom_shape_border.dart';
 
 import 'package:flutter_pokemon_clean_architecture/injection.dart' as di;
-import 'package:flutter_pokemon_clean_architecture/ui/blocs/pokemon/pokemon_bloc.dart';
+import 'package:flutter_pokemon_clean_architecture/ui/blocs/blocs.dart';
 import 'package:flutter_pokemon_clean_architecture/ui/router.gr.dart';
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
 
-  final _color = Colors.amber;
+  final _color = Colors.teal;
   final _appRouter = AppRouter();
 
   @override
@@ -18,6 +19,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => di.injector<PokemonBloc>(),
         ),
+        BlocProvider(
+          create: (_) => di.injector<DetailsBloc>(),
+        ),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
@@ -25,6 +29,10 @@ class MyApp extends StatelessWidget {
         routeInformationParser: _appRouter.defaultRouteParser(),
         theme: ThemeData(
           primaryColor: _color,
+          appBarTheme: AppBarTheme(
+            backgroundColor: _color,
+            shape: CustomShapeBorder(),
+          ),
           colorScheme: ColorScheme.fromSwatch().copyWith(
             secondary: _color,
           ),

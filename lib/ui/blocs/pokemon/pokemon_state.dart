@@ -21,6 +21,15 @@ class PokemonError extends PokemonState {
   List<Object?> get props => [message];
 }
 
+class PokemonHasList extends PokemonState {
+  const PokemonHasList(this.result);
+
+  final List<Pokemon> result;
+
+  @override
+  List<Object?> get props => [result];
+}
+
 class PokemonHasData extends PokemonState {
   const PokemonHasData(this.result);
 
@@ -30,10 +39,10 @@ class PokemonHasData extends PokemonState {
   List<Object?> get props => [result];
 }
 
-class PokemonHasList extends PokemonState {
-  const PokemonHasList(this.result);
+class PokemonHasDetails extends PokemonState {
+  const PokemonHasDetails(this.result);
 
-  final List<Pokemon> result;
+  final Pokemon result;
 
   @override
   List<Object?> get props => [result];
