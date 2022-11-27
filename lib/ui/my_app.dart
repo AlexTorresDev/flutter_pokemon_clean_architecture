@@ -3,12 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_pokemon_clean_architecture/injection.dart' as di;
 import 'package:flutter_pokemon_clean_architecture/ui/blocs/pokemon/pokemon_bloc.dart';
-import 'package:flutter_pokemon_clean_architecture/ui/pages/home/home_page.dart';
+import 'package:flutter_pokemon_clean_architecture/ui/router.gr.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
 
-  final Color _color = Colors.amber;
+  final _color = Colors.amber;
+  final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +19,10 @@ class MyApp extends StatelessWidget {
           create: (_) => di.injector<PokemonBloc>(),
         ),
       ],
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        home: const HomePage(),
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        routerDelegate: _appRouter.delegate(),
+        routeInformationParser: _appRouter.defaultRouteParser(),
         theme: ThemeData(
           primaryColor: _color,
           colorScheme: ColorScheme.fromSwatch().copyWith(
@@ -36,6 +38,9 @@ class MyApp extends StatelessWidget {
           ),
           textSelectionTheme: TextSelectionThemeData(
             cursorColor: _color,
+          ),
+          progressIndicatorTheme: ProgressIndicatorThemeData(
+            color: _color,
           ),
         ),
       ),

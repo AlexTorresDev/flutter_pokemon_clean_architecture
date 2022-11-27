@@ -4,5 +4,5 @@ import 'package:flutter_pokemon_clean_architecture/ui/my_app.dart';
 
 void main() {
   di.init();
-  runApp(const MyApp());
+  runApp(MyApp());
 }

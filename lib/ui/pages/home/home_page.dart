@@ -47,13 +47,16 @@ class _HomePageState extends State<HomePage> {
                     child: CircularProgressIndicator(),
                   );
                 } else if (state is PokemonHasList) {
-                  return ListView.builder(
+                  return ListView.separated(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: state.result.length,
                     itemBuilder: (context, index) {
                       final pokemon = state.result[index];
                       return PokemonCard(pokemon: pokemon);
+                    },
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(height: 16);
                     },
                   );
                 } else if (state is PokemonError) {
