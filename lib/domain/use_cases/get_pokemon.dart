@@ -8,6 +8,6 @@ class GetPokemon {
 
   GetPokemon(this.repository);
 
-  Future<Either<Failure, Pokemon>> call(String name) =>
+  Future<Either<Failure, List<Pokemon>>> call(String name) =>
       repository.getPokemon(name);
 }

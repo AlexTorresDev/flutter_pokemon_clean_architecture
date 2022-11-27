@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 abstract class RemoteDataSource {
   Future<List<PokemonModel>> getPokemonList();
-  Future<PokemonModel> getPokemon(String name);
+  Future<List<PokemonModel>> getPokemon(String name);
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
@@ -26,7 +26,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
       final List<PokemonModel> pokemonList = [];
 
       for (var i = 0; i < results.length; i++) {
-        pokemonList.add(await getPokemon(results[i]['name']));
+        pokemonList.add((await getPokemon(results[i]['name']))[0]);
       }
 
       return pokemonList;
@@ -36,12 +36,12 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   }
 
   @override
-  Future<PokemonModel> getPokemon(String name) async {
+  Future<List<PokemonModel>> getPokemon(String name) async {
     final response =
         await client.get(Uri.parse('https://pokeapi.co/api/v2/pokemon/$name'));
 
     if (response.statusCode == 200) {
-      return PokemonModel.fromJson(json.decode(response.body));
+      return [PokemonModel.fromJson(json.decode(response.body))];
     } else {
       throw ServerException();
     }

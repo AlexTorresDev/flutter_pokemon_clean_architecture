@@ -21,7 +21,6 @@ class PokemonRepositoryImpl implements PokemonRepository {
   Future<Either<Failure, List<Pokemon>>> getPokemonList() async {
     try {
       final localPokemonList = await localDataSource.getPokemonList();
-      print(localPokemonList);
 
       if (localPokemonList.isEmpty) {
         final remotePokemonList = await remoteDataSource.getPokemonList();
@@ -43,10 +42,18 @@ class PokemonRepositoryImpl implements PokemonRepository {
   }
 
   @override
-  Future<Either<Failure, Pokemon>> getPokemon(String name) async {
+  Future<Either<Failure, List<Pokemon>>> getPokemon(String name) async {
     try {
-      final result = await remoteDataSource.getPokemon(name);
-      return Right(result);
+      final localPokemon = await localDataSource.getPokemon(name);
+
+      if (localPokemon.isEmpty) {
+        final remotePokemon = await remoteDataSource.getPokemon(name);
+        // save pokemon to local data source
+        localDataSource.savePokemonList(remotePokemon);
+        return Right(remotePokemon);
+      } else {
+        return Right(localPokemon);
+      }
     } on ServerException {
       return const Left(ServerFailure(''));
     } on SocketException {

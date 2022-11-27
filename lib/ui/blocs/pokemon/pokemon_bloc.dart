@@ -41,7 +41,7 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
             emit(PokemonError(failure.message));
           },
           (data) {
-            emit(PokemonHasData(data));
+            emit(PokemonHasList(data));
           },
         );
       },
