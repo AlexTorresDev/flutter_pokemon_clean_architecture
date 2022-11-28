@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:flutter_pokemon_clean_architecture/data/database.dart';
+import 'package:flutter_pokemon_clean_architecture/core/connections/db_provider.dart';
 import 'package:flutter_pokemon_clean_architecture/data/data_sources/local_data_source.dart';
 import 'package:flutter_pokemon_clean_architecture/data/data_sources/remote_data_source.dart';
 import 'package:flutter_pokemon_clean_architecture/data/repositories/pokemon_repository_impl.dart';

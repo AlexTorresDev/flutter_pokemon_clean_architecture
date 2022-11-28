@@ -1,4 +1,4 @@
-import 'package:flutter_pokemon_clean_architecture/data/database.dart';
+import 'package:flutter_pokemon_clean_architecture/core/connections/db_provider.dart';
 import 'package:flutter_pokemon_clean_architecture/data/models/pokemon_model.dart';
 import 'package:sqflite/sqflite.dart';
 

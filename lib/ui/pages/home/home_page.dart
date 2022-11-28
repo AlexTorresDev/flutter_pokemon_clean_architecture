@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pokemon_clean_architecture/ui/blocs/blocs.dart';
 import 'package:flutter_pokemon_clean_architecture/ui/pages/home/widgets/pokemon_card.dart';
+import 'package:flutter_pokemon_clean_architecture/ui/widgets/connection_status.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -27,6 +28,7 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
+            const ConnectionStatus(),
             TextField(
               decoration: const InputDecoration(
                 hintText: 'Search',
