@@ -5,20 +5,33 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "flutter_pokemon_clean_architecture",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "flutter_pokemon_clean_architecture (profile mode)",
+            "name": "Development",
             "request": "launch",
             "type": "dart",
+            "args": [
+                "--dart-define",
+                "ENVIRONMENT=development"
+            ],
+            "flutterMode": "debug"
+        },
+        /*{
+            "name": "Profile",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--dart-define",
+                "ENVIRONMENT=profile"
+            ],
             "flutterMode": "profile"
-        },
+        },*/
         {
-            "name": "flutter_pokemon_clean_architecture (release mode)",
+            "name": "Production",
             "request": "launch",
             "type": "dart",
+            "args": [
+                "--dart-define",
+                "ENVIRONMENT=production"
+            ],
             "flutterMode": "release"
         }
     ]
