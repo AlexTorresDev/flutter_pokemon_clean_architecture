@@ -8,5 +8,6 @@ class GetPokemonList {
 
   GetPokemonList(this.repository);
 
-  Future<Either<Failure, List<Pokemon>>> call() => repository.getPokemonList();
+  Future<Either<Failure, List<Pokemon>>> call(int limit, int offset) =>
+      repository.getPokemonList(limit, offset);
 }

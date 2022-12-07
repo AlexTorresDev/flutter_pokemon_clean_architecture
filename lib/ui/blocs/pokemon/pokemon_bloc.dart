@@ -12,16 +12,19 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
   PokemonBloc(this.getPokemonList, this.getPokemon) : super(PokemonEmpty()) {
     on<OnGetAll>(
       (event, emit) async {
+        final limit = event.limit;
+        final offset = event.offset;
+
         emit(PokemonLoading());
 
-        final result = await getPokemonList.call();
+        final result = await getPokemonList.call(limit, offset);
 
         result.fold(
           (failure) {
             emit(PokemonError(failure.message));
           },
           (data) {
-            emit(PokemonHasList(data));
+            emit(PokemonHasList(data, offset));
           },
         );
       },
@@ -41,7 +44,7 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
             emit(PokemonError(failure.message));
           },
           (data) {
-            emit(PokemonHasList(data));
+            emit(PokemonHasList(data, 0));
           },
         );
       },

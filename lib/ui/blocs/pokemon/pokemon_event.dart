@@ -8,10 +8,13 @@ abstract class PokemonEvent extends Equatable {
 }
 
 class OnGetAll extends PokemonEvent {
-  const OnGetAll();
+  const OnGetAll(this.limit, this.offset);
+
+  final int limit;
+  final int offset;
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [limit, offset];
 }
 
 class OnNameChanged extends PokemonEvent {

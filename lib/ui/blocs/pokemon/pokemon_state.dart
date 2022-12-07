@@ -22,12 +22,13 @@ class PokemonError extends PokemonState {
 }
 
 class PokemonHasList extends PokemonState {
-  const PokemonHasList(this.result);
+  const PokemonHasList(this.result, this.offset);
 
   final List<Pokemon> result;
+  final int offset;
 
   @override
-  List<Object?> get props => [result];
+  List<Object?> get props => [result, offset];
 }
 
 class PokemonHasData extends PokemonState {

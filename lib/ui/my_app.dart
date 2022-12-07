@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_pokemon_clean_architecture/core/framework/router/router.gr.dart';
 import 'package:flutter_pokemon_clean_architecture/core/framework/utils/custom_shape_border.dart';
 
 import 'package:flutter_pokemon_clean_architecture/injection.dart' as di;
 import 'package:flutter_pokemon_clean_architecture/ui/blocs/blocs.dart';
-import 'package:flutter_pokemon_clean_architecture/ui/router.gr.dart';
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);

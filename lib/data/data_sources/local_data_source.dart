@@ -3,7 +3,7 @@ import 'package:flutter_pokemon_clean_architecture/data/models/pokemon_model.dar
 import 'package:sqflite/sqflite.dart';
 
 abstract class LocalDataSource {
-  Future<List<PokemonModel>> getPokemonList();
+  Future<List<PokemonModel>> getPokemonList(int limit, int offset);
   Future<List<PokemonModel>> getPokemon(String name);
   void savePokemonList(List<PokemonModel> pokemonList) {}
 }
@@ -16,9 +16,9 @@ class LocalDataSourceImpl implements LocalDataSource {
   });
 
   @override
-  Future<List<PokemonModel>> getPokemonList() async {
+  Future<List<PokemonModel>> getPokemonList(int limit, int offset) async {
     final database = await dbProvider!.database;
-    final maps = await database!.query('pokemon');
+    final maps = await database!.query('pokemon', limit: limit, offset: offset);
 
     if (maps.isNotEmpty) {
       return maps.map((e) => PokemonModel.fromJson(e)).toList();

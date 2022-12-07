@@ -21,15 +21,15 @@ class PokemonCard extends StatelessWidget {
           'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png';
     }
 
-    /*final image = Image.network(
+    final image = Image.network(
       imageURL,
       width: 120,
       height: 120,
       fit: BoxFit.cover,
-    );*/
+    );
 
     return FutureBuilder<Color>(
-        future: /*_getImagePalette(image.image)*/ Future.value(Colors.white),
+        future: _getImagePalette(image.image),
         builder: (_, snapshot) {
           final bgColor = (snapshot.data ?? Colors.black26).withAlpha(150);
 
@@ -55,7 +55,7 @@ class PokemonCard extends StatelessWidget {
                       right: -20,
                       child: Transform.rotate(
                         angle: -0.1,
-                        child: /*image*/ Container(),
+                        child: image,
                       ),
                     ),
                     Positioned(
@@ -128,9 +128,10 @@ class PokemonCard extends StatelessWidget {
   }
 
   // Calculate dominant color from ImageProvider
-  Future<Color> _getImagePalette(ImageProvider imageProvider) async {
-    final PaletteGenerator paletteGenerator =
-        await PaletteGenerator.fromImageProvider(imageProvider);
-    return paletteGenerator.dominantColor!.color;
+  Future<Color> _getImagePalette(ImageProvider? imageProvider) async {
+    final paletteGenerator =
+        await PaletteGenerator.fromImageProvider(imageProvider!);
+
+    return paletteGenerator.dominantColor?.color ?? Colors.black26;
   }
 }

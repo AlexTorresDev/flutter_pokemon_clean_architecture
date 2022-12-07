@@ -6,7 +6,7 @@ import 'package:flutter_pokemon_clean_architecture/data/models/pokemon_model.dar
 import 'package:http/http.dart' as http;
 
 abstract class RemoteDataSource {
-  Future<List<PokemonModel>> getPokemonList();
+  Future<List<PokemonModel>> getPokemonList(int limit, int offset);
   Future<List<PokemonModel>> getPokemon(String name);
 }
 
@@ -18,8 +18,9 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   });
 
   @override
-  Future<List<PokemonModel>> getPokemonList() async {
-    final response = await client.get(Uri.parse('$baseURL?limit=10'));
+  Future<List<PokemonModel>> getPokemonList(int limit, int offset) async {
+    final response =
+        await client.get(Uri.parse('$baseURL?limit=$limit&offset=$offset'));
 
     if (response.statusCode == 200) {
       final results = json.decode(response.body)['results'] as List;

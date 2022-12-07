@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/services.dart';
 
 class NetworkConnectivity {
   NetworkConnectivity._();
@@ -19,19 +20,17 @@ class NetworkConnectivity {
   bool _hasConnection = false;
 
   void init() async {
-    ConnectivityResult result = await _connectivity.checkConnectivity();
-    _checkStatus(result);
-    _connectivity.onConnectivityChanged
-        .listen((result) => _checkStatus(result));
+    _checkStatus();
+    _connectivity.onConnectivityChanged.listen((_) => _checkStatus());
   }
 
-  void _checkStatus(ConnectivityResult result) async {
+  void _checkStatus() async {
     bool previousConnectionStatus = _hasConnection;
 
     try {
-      final result = await InternetAddress.lookup('google.com');
-      _hasConnection = result.isNotEmpty && result[0].rawAddress.isNotEmpty;
-    } on SocketException catch (_) {
+      ConnectivityResult result = await _connectivity.checkConnectivity();
+      _hasConnection = result != ConnectivityResult.none;
+    } on PlatformException catch (_) {
       _hasConnection = false;
     }
 
