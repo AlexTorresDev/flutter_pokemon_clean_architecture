@@ -36,17 +36,4 @@ class PokemonCubit extends Cubit<PokemonState> {
       },
     );
   }
-
-  Future<void> getDetails(String name) async {
-    final result = await getPokemon.call(name);
-
-    result.fold(
-      (failure) {
-        emit(PokemonError(failure.message));
-      },
-      (data) {
-        emit(PokemonHasDetails(data[0]));
-      },
-    );
-  }
 }

@@ -24,15 +24,3 @@ class PokemonHasList extends PokemonState {
   final List<Pokemon> result;
   final int offset;
 }
-
-class PokemonHasData extends PokemonState {
-  PokemonHasData(this.result) : super([result]);
-
-  final Pokemon result;
-}
-
-class PokemonHasDetails extends PokemonState {
-  PokemonHasDetails(this.result) : super([result]);
-
-  final Pokemon result;
-}
