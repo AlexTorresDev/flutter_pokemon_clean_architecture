@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:flutter_pokemon_clean_architecture/ui/my_app.dart';
+import 'package:flutter_pokemon_clean_architecture/src/presentation/my_app.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
