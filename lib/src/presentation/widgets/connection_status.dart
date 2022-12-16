@@ -29,7 +29,9 @@ class _ConnectionStatusState extends State<ConnectionStatus> {
         return Container(
           padding: const EdgeInsets.all(4),
           decoration: BoxDecoration(
-            color: isConnected ? Colors.green : Colors.red,
+            color: isConnected
+                ? Theme.of(context).colorScheme.secondary
+                : Colors.red,
             borderRadius: BorderRadius.circular(4),
           ),
           child: Row(

@@ -1,5 +1,5 @@
-import 'package:flutter_pokemon_clean_architecture/src/data/models/sprite_model.dart';
-import 'package:flutter_pokemon_clean_architecture/src/domain/entities/pokemon.dart';
+import 'package:flutter_pokemon_clean_architecture/src/domain/entities/entities.dart';
+import 'sprite_model.dart';
 
 class PokemonModel extends Pokemon {
   const PokemonModel({

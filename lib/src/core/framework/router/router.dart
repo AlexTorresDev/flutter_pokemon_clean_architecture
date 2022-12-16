@@ -1,29 +1,24 @@
-import 'package:auto_route/auto_route.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter_pokemon_clean_architecture/src/presentation/pages/details/details_page.dart';
 import 'package:flutter_pokemon_clean_architecture/src/presentation/pages/error/error_page.dart';
 import 'package:flutter_pokemon_clean_architecture/src/presentation/pages/home/home_page.dart';
 import 'package:flutter_pokemon_clean_architecture/src/presentation/pages/login/login_page.dart';
 
-@MaterialAutoRouter(
-  replaceInRouteName: 'Page,Route',
-  routes: <AutoRoute>[
-    AutoRoute(
+final GoRouter router = GoRouter(
+  initialLocation: '/login',
+  routes: [
+    GoRoute(
       path: '/login',
-      page: LoginPage,
-      initial: true,
+      builder: (_, state) => LoginPage(),
     ),
-    AutoRoute(
+    GoRoute(
       path: '/',
-      page: HomePage,
+      builder: (_, state) => const HomePage(),
     ),
-    AutoRoute(
+    GoRoute(
       path: '/details/:id',
-      page: DetailsPage,
-    ),
-    AutoRoute(
-      path: '*',
-      page: ErrorPage,
+      builder: (_, state) => DetailsPage(id: state.params['id']!),
     ),
   ],
-)
-class $AppRouter {}
+  errorBuilder: (_, state) => const ErrorPage(),
+);

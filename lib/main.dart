@@ -13,5 +13,5 @@ void main() async {
       String.fromEnvironment('ENVIRONMENT', defaultValue: 'development');
   await dotenv.load(fileName: 'assets/env/.env.$environment');
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }

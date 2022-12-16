@@ -1,3 +1,38 @@
 {
-    "hello": "world"
+    "loginTitle": "Login",
+    "@loginTitle": {
+        "description": "Title of the login page"
+    },
+    "loginUsername": "Username",
+    "@loginUsername": {
+        "description": "Label for the username field"
+    },
+    "loginPassword": "Password",
+    "@loginPassword": {
+        "description": "Label for the password field"
+    },
+    "loginSubmit": "Login",
+    "@loginSubmit": {
+        "description": "Label for the submit button"
+    },
+    "loginError": "Invalid username or password",
+    "@loginError": {
+        "description": "Message displayed when the login fails"
+    },
+    "logout": "You have been logged out",
+    "@logout": {
+        "description": "Message displayed when the user logs out"
+    },
+    "loginFingerPrint": "Fingerprint",
+    "@loginFingerPrint": {
+        "description": "Label for the fingerprint field"
+    },
+    "pokemonLoading": "Your Pokedex is loading...",
+    "@pokemonLoading": {
+        "description": "Message displayed while the Pokedex is loading"
+    },
+    "pokemonNotFound": "Pokemon not found",
+    "@pokemonNotFound": {
+        "description": "Message displayed when a pokemon is not found"
+    }
 }

@@ -1,4 +1,4 @@
-import 'package:flutter_pokemon_clean_architecture/src/domain/entities/sprite.dart';
+import 'package:flutter_pokemon_clean_architecture/src/domain/entities/entities.dart';
 
 class SpriteModel extends Sprite {
   const SpriteModel({

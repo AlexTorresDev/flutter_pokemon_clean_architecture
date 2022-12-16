@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pokemon_clean_architecture/src/presentation/blocs/blocs.dart';
@@ -6,7 +5,7 @@ import 'package:flutter_pokemon_clean_architecture/src/presentation/blocs/blocs.
 class DetailsPage extends StatefulWidget {
   const DetailsPage({
     Key? key,
-    @PathParam() required this.id,
+    required this.id,
   }) : super(key: key);
 
   final String id;

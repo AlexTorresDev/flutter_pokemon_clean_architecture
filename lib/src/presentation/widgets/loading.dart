@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_pokemon_clean_architecture/src/config/common.dart';
 
 class Loading extends StatelessWidget {
   const Loading({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class Loading extends StatelessWidget {
           ),
           const SizedBox(height: 32),
           Text(
-            'Your Pokedex is loading...',
+            AppLocalizations.of(context)!.pokemonLoading,
             style: theme.textTheme.titleMedium,
           ),
           /*const SizedBox(height: 16),

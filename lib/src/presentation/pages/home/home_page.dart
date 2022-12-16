@@ -3,9 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:flutter_pokemon_clean_architecture/src/domain/entities/pokemon.dart';
 import 'package:flutter_pokemon_clean_architecture/src/presentation/blocs/blocs.dart';
-import 'package:flutter_pokemon_clean_architecture/src/presentation/pages/home/widgets/pokemon_card.dart';
-import 'package:flutter_pokemon_clean_architecture/src/presentation/widgets/connection_status.dart';
-import 'package:flutter_pokemon_clean_architecture/src/presentation/widgets/loading.dart';
+import 'package:flutter_pokemon_clean_architecture/src/presentation/widgets/widgets.dart';
+import 'widgets/pokemon_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

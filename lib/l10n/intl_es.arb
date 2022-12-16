@@ -1,0 +1,11 @@
+{
+    "loginTitle": "Inicio de sesion",
+    "loginUsername": "Nombre de usuario",
+    "loginPassword": "Contraseña",
+    "loginSubmit": "Iniciar sesion",
+    "loginError": "Nombre de usuario o contraseña incorrectos",
+    "logout": "Cerrar sesion",
+    "loginFingerPrint": "Iniciar sesion con huella digital",
+    "pokemonLoading": "Cargando Pokedex...",
+    "pokemonNotFound": "No se encontraron pokemon"
+}

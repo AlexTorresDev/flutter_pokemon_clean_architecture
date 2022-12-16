@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:auto_route/auto_route.dart';
+import 'package:go_router/go_router.dart';
 
 class ErrorPage extends StatelessWidget {
   const ErrorPage({Key? key}) : super(key: key);
@@ -21,12 +21,12 @@ class ErrorPage extends StatelessWidget {
             ),
             const SizedBox(height: 32),
             Text(
-              'Sorry your Pokedex is not found!',
+              'Sorry, your Pokedex is not found!',
               style: theme.textTheme.titleMedium,
             ),
             const SizedBox(height: 16),
             TextButton(
-              onPressed: () => context.router.replaceNamed('/'),
+              onPressed: () => context.replace('/'),
               child: const Text('Go to home'),
             ),
           ],

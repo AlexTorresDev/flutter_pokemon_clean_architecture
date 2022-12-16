@@ -30,7 +30,7 @@ packages:
     source: hosted
     version: "2.9.0"
   auto_route:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: auto_route
       url: "https://pub.dartlang.org"
@@ -225,6 +225,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.7.8"
+  dynamic_color:
+    dependency: "direct main"
+    description:
+      name: dynamic_color
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.5.4"
   equatable:
     dependency: "direct main"
     description:
@@ -336,6 +343,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
+  go_router:
+    dependency: "direct main"
+    description:
+      name: go_router
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.2.4"
   graphs:
     dependency: transitive
     description:
