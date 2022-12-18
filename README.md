@@ -12,3 +12,6 @@
 ## Clean Architecture Diagram
 
 ![Image](clean_architecture_flutter.jpeg)
+
+## Folder Structure
+![Image](folder_structure.webp)

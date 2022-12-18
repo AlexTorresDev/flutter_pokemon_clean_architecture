@@ -2,30 +2,22 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_pokemon_clean_architecture/src/domain/entities/pokemon.dart';
 
 abstract class DetailsState extends Equatable {
-  const DetailsState();
+  const DetailsState([this._props = const []]);
+
+  final List<Object?> _props;
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [_props];
 }
-
-class DetailsEmpty extends DetailsState {}
 
 class DetailsLoading extends DetailsState {}
 
 class DetailsError extends DetailsState {
-  const DetailsError(this.message);
-
+  DetailsError(this.message) : super([message]);
   final String message;
-
-  @override
-  List<Object?> get props => [message];
 }
 
 class DetailsHasData extends DetailsState {
-  const DetailsHasData(this.pokemon);
-
+  DetailsHasData(this.pokemon) : super([pokemon]);
   final Pokemon pokemon;
-
-  @override
-  List<Object?> get props => [pokemon];
 }

@@ -17,7 +17,7 @@ class DetailsPage extends StatefulWidget {
 class _DetailsPageState extends State<DetailsPage> {
   @override
   void initState() {
-    context.read<DetailsBloc>().add(OnGetDetails(widget.id));
+    context.read<DetailsCubit>().getByName(widget.id);
     super.initState();
   }
 
@@ -27,7 +27,7 @@ class _DetailsPageState extends State<DetailsPage> {
       appBar: AppBar(
         title: const Text('Details'),
       ),
-      body: BlocBuilder<DetailsBloc, DetailsState>(
+      body: BlocBuilder<DetailsCubit, DetailsState>(
         builder: (context, state) {
           if (state is DetailsLoading) {
             return const Center(

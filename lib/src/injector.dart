@@ -23,7 +23,7 @@ void init() {
 
   // BLoC
   injector.registerFactory(() => PokemonCubit(injector(), injector()));
-  injector.registerFactory(() => DetailsBloc(injector()));
+  injector.registerFactory(() => DetailsCubit(injector()));
 
   // Repository
   injector.registerLazySingleton<PokemonRepository>(() => PokemonRepositoryImpl(

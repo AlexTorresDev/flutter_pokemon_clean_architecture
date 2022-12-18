@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pokemon_clean_architecture/src/config/common.dart';
 import 'package:flutter_pokemon_clean_architecture/src/core/framework/router/router.dart';
 import 'package:flutter_pokemon_clean_architecture/src/core/framework/themes.dart';
-import 'package:flutter_pokemon_clean_architecture/src/injection.dart' as di;
+import 'package:flutter_pokemon_clean_architecture/src/injector.dart' as di;
 import 'package:flutter_pokemon_clean_architecture/src/presentation/blocs/blocs.dart';
 
 class MyApp extends StatelessWidget {
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
           create: (_) => di.injector<PokemonCubit>(),
         ),
         BlocProvider(
-          create: (_) => di.injector<DetailsBloc>(),
+          create: (_) => di.injector<DetailsCubit>(),
         ),
       ],
       child: DynamicColorBuilder(
@@ -27,7 +27,6 @@ class MyApp extends StatelessWidget {
           return MaterialApp.router(
             debugShowCheckedModeBanner: false,
             routerConfig: router,
-            //locale: AppOptions.of(context)?.locale,
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
             localeResolutionCallback: (locale, supportedLocales) => locale,
