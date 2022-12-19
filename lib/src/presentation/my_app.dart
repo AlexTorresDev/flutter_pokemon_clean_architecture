@@ -16,10 +16,10 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => di.injector<PokemonCubit>(),
+          create: (_) => di.getIt<PokemonCubit>(),
         ),
         BlocProvider(
-          create: (_) => di.injector<DetailsCubit>(),
+          create: (_) => di.getIt<DetailsCubit>(),
         ),
       ],
       child: DynamicColorBuilder(

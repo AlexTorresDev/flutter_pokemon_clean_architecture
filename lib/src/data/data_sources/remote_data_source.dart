@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter_pokemon_clean_architecture/src/core/errors/exceptions.dart';
 import 'package:flutter_pokemon_clean_architecture/src/core/framework/utils/constants.dart';
+import 'package:flutter_pokemon_clean_architecture/src/core/network/client_service.dart';
 import 'package:flutter_pokemon_clean_architecture/src/data/models/pokemon_model.dart';
-import 'package:http/http.dart' as http;
 
 abstract class RemoteDataSource {
   Future<List<PokemonModel>> getPokemonList(int limit, int offset);
@@ -15,12 +15,12 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     required this.client,
   });
 
-  final http.Client client;
+  final ClientService client;
 
   @override
   Future<List<PokemonModel>> getPokemonList(int limit, int offset) async {
     final response =
-        await client.get(Uri.parse('$baseURL?limit=$limit&offset=$offset'));
+        await client.get('$baseURL?limit=$limit&offset=$offset');
 
     if (response.statusCode == 200) {
       final results = json.decode(response.body)['results'] as List;
@@ -38,7 +38,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   @override
   Future<List<PokemonModel>> getPokemon(String name) async {
-    final response = await client.get(Uri.parse('$baseURL/$name'));
+    final response = await client.get('$baseURL/$name');
 
     if (response.statusCode == 200) {
       return [PokemonModel.fromJson(json.decode(response.body))];

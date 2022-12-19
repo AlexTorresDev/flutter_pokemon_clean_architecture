@@ -1,7 +1,6 @@
 import 'package:get_it/get_it.dart';
-import 'package:http/http.dart' as http;
-
 import 'package:flutter_pokemon_clean_architecture/src/core/connections/db_provider.dart';
+import 'package:flutter_pokemon_clean_architecture/src/core/network/client_service.dart';
 import 'package:flutter_pokemon_clean_architecture/src/data/data_sources/local_data_source.dart';
 import 'package:flutter_pokemon_clean_architecture/src/data/data_sources/remote_data_source.dart';
 import 'package:flutter_pokemon_clean_architecture/src/data/repositories/pokemon_repository_impl.dart';
@@ -10,30 +9,31 @@ import 'package:flutter_pokemon_clean_architecture/src/domain/use_cases/get_poke
 import 'package:flutter_pokemon_clean_architecture/src/domain/use_cases/get_pokemon_list.dart';
 import 'package:flutter_pokemon_clean_architecture/src/presentation/blocs/blocs.dart';
 
-final injector = GetIt.instance;
+final getIt = GetIt.instance;
 
 void init() {
   // Core
-  injector.registerLazySingleton(() => http.Client());
-  injector.registerLazySingleton(() => DBProvider.instance);
+  getIt
+    ..registerLazySingleton(() => ClientService())
+    ..registerLazySingleton(() => DBProvider.instance)
 
-  // Use case
-  injector.registerLazySingleton(() => GetPokemonList(injector()));
-  injector.registerLazySingleton(() => GetPokemon(injector()));
+    // Use case
+    ..registerLazySingleton(() => GetPokemonList(getIt()))
+    ..registerLazySingleton(() => GetPokemon(getIt()))
 
-  // BLoC
-  injector.registerFactory(() => PokemonCubit(injector(), injector()));
-  injector.registerFactory(() => DetailsCubit(injector()));
+    // BLoC
+    ..registerFactory(() => PokemonCubit(getIt(), getIt()))
+    ..registerFactory(() => DetailsCubit(getIt()))
 
-  // Repository
-  injector.registerLazySingleton<PokemonRepository>(() => PokemonRepositoryImpl(
-        remoteDataSource: injector(),
-        localDataSource: injector(),
-      ));
+    // Repository
+    ..registerLazySingleton<PokemonRepository>(() => PokemonRepositoryImpl(
+          remoteDataSource: getIt(),
+          localDataSource: getIt(),
+        ))
 
-  // Data sources
-  injector.registerLazySingleton<RemoteDataSource>(
-      () => RemoteDataSourceImpl(client: injector()));
-  injector.registerLazySingleton<LocalDataSource>(
-      () => LocalDataSourceImpl(dbProvider: injector()));
+    // Data sources
+    ..registerLazySingleton<RemoteDataSource>(
+        () => RemoteDataSourceImpl(client: getIt()))
+    ..registerLazySingleton<LocalDataSource>(
+        () => LocalDataSourceImpl(dbProvider: getIt()));
 }
