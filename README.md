@@ -1,12 +1,15 @@
 # Flutter Pokemon App
 
+Flutter app using clean architecture and BLoC pattern.
+
 ## Using on this app
 
 - Clean Architecture
 - sqflite
-- Auto route
+- go_route
 - GetIt
 - BLoC
+- Mockito test
 - [PokeApi](https://pokeapi.co/)
 
 ## Clean Architecture Diagram

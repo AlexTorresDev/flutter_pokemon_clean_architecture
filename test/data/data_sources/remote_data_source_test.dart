@@ -17,10 +17,11 @@ class MockClientService extends Mock implements ClientService {
 }
 
 void main() async {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   late MockClientService mockClient;
   late RemoteDataSourceImpl remoteDataSourceImpl;
 
-  TestWidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: 'assets/env/.env.test');
 
   setUp(() {
