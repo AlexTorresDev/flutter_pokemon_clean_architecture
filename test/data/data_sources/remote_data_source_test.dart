@@ -1,15 +1,20 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' show Response;
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:flutter_pokemon_clean_architecture/src/core/errors/exceptions.dart';
 import 'package:flutter_pokemon_clean_architecture/src/core/network/client_service.dart';
 import 'package:flutter_pokemon_clean_architecture/src/data/data_sources/remote_data_source.dart';
 import 'package:flutter_pokemon_clean_architecture/src/data/models/models.dart';
 
-@GenerateNiceMocks([MockSpec<ClientService>()])
-import 'remote_data_source_test.mocks.dart';
+class MockClientService extends Mock implements ClientService {
+  @override
+  Future<Response> get(String? url) => super.noSuchMethod(
+        Invocation.method(#get, [url]),
+        returnValue: Future.value(Response('', 200)),
+        returnValueForMissingStub: Future.value(Response('', 404)),
+      ) as Future<Response>;
+}
 
 void main() async {
   late MockClientService mockClient;
