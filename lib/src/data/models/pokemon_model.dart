@@ -49,7 +49,7 @@ class PokemonModel extends Pokemon {
         "name": name,
         "sort_order": order,
         "weight": weight,
-        // TODO: Fix this
-        //"sprites": sprites!.toJson(),
+        "sprites":
+            (sprites as List<SpriteModel>).map((e) => e.toJson()).toList(),
       };
 }
