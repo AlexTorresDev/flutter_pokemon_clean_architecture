@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
             } else if (state is PokemonHasList) {
               return Column(
                 children: [
-                  const ConnectionStatus(),
+                  // const ConnectionStatus(),
                   const SizedBox(height: 16),
                   TextField(
                     decoration: const InputDecoration(

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter_pokemon_clean_architecture/src/core/errors/exceptions.dart';
-import 'package:flutter_pokemon_clean_architecture/src/core/framework/utils/constants.dart';
 import 'package:flutter_pokemon_clean_architecture/src/core/network/client_service.dart';
 import 'package:flutter_pokemon_clean_architecture/src/data/models/pokemon_model.dart';
 
@@ -19,8 +18,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   @override
   Future<List<PokemonModel>> getPokemonList(int limit, int offset) async {
-    final response =
-        await client.get('$baseURL?limit=$limit&offset=$offset');
+    final response = await client.get('?limit=$limit&offset=$offset');
 
     if (response.statusCode == 200) {
       final results = json.decode(response.body)['results'] as List;
@@ -38,7 +36,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   @override
   Future<List<PokemonModel>> getPokemon(String name) async {
-    final response = await client.get('$baseURL/$name');
+    final response = await client.get('/$name');
 
     if (response.statusCode == 200) {
       return [PokemonModel.fromJson(json.decode(response.body))];

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_pokemon_clean_architecture/src/core/connections/network_connectivity.dart';
+// import 'package:flutter_pokemon_clean_architecture/src/core/connections/network_connectivity.dart';
 import 'package:flutter_pokemon_clean_architecture/src/injector.dart' as di;
 import 'package:flutter_pokemon_clean_architecture/src/presentation/my_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  NetworkConnectivity.instance.init();
+  // NetworkConnectivity.instance.init();
   di.init();
 
   const environment =

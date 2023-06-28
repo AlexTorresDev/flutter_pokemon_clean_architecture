@@ -39,7 +39,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
         DatabaseFailure('Failed to get pokemon list from cache'),
       );*/
     } on ServerException {
-      return const Left(ServerFailure(''));
+      return const Left(ServerFailure('Failed to get pokemon list'));
     } on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
     }

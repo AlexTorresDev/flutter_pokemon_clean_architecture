@@ -17,7 +17,7 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(
       path: '/details/:id',
-      builder: (_, state) => DetailsPage(id: state.params['id']!),
+      builder: (_, state) => DetailsPage(id: state.pathParameters['id']!),
     ),
   ],
   errorBuilder: (_, state) => const ErrorPage(),

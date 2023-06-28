@@ -1,4 +1,4 @@
-import 'dart:async';
+/* import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/services.dart';
@@ -39,4 +39,4 @@ class NetworkConnectivity {
   }
 
   void dispose() => _controller.close();
-}
+} */

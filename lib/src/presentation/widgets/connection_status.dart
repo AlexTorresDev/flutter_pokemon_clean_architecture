@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/* import 'package:flutter/material.dart';
 import 'package:flutter_pokemon_clean_architecture/src/core/connections/network_connectivity.dart';
 
 class ConnectionStatus extends StatefulWidget {
@@ -62,3 +62,4 @@ class _ConnectionStatusState extends State<ConnectionStatus> {
     super.dispose();
   }
 }
+ */

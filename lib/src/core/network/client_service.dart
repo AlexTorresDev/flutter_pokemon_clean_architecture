@@ -10,7 +10,7 @@ class ClientService {
 
   Future<Response> get(String? url) async {
     return await client.get(
-      Uri.parse('$baseURL/${url ?? ''}'),
+      Uri.parse('$baseURL${url ?? ''}'),
       headers: {'Content-Type': 'application/json'},
     );
   }
@@ -20,7 +20,7 @@ class ClientService {
     final h = {...headers ?? {}};
 
     return await client.post(
-      Uri.parse('$baseURL/${url ?? ''}'),
+      Uri.parse('$baseURL${url ?? ''}'),
       headers: {...h, 'Content-Type': 'application/json'},
       body: utf8.encode(jsonEncode(body)),
     );
