@@ -41,13 +41,11 @@ jobs:
         with:
           name: gitversion
           path: version.txt
-      - name: Create new file without newline char from version.txt
-        run: find version.txt -type f -print0 | tr -d '\n' < version.txt > version1.txt
       - name: Read version from file
         id: version
         uses: juliangruber/read-file-action@v1
         with:
-          path: version1.txt
+          path: version.txt
       - name: Update version in pubspec.yaml
         run: sed -i "s/99.99.99+99/${{ steps.version.outputs.content }}+${{ github.run_number }}/g" pubspec.yaml
       - name: Download keystore
