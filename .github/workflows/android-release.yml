@@ -42,7 +42,7 @@ jobs:
           name: gitversion
           path: version.txt
       - name: Create new file without newline char from version.txt
-        run: tr -d '\n' < version.txt > version1.txt
+        run: find version.txt -type f -print0 | tr -d '\n' < version.txt > version1.txt
       - name: Read version from file
         id: version
         uses: juliangruber/read-file-action@v1
