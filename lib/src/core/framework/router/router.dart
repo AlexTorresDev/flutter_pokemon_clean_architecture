@@ -5,7 +5,7 @@ import 'package:flutter_pokemon_clean_architecture/src/presentation/pages/home/h
 import 'package:flutter_pokemon_clean_architecture/src/presentation/pages/login/login_page.dart';
 
 final GoRouter router = GoRouter(
-  initialLocation: '/login',
+  initialLocation: '/',
   routes: [
     GoRoute(
       path: '/login',

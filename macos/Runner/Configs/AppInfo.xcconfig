@@ -8,7 +8,7 @@
 PRODUCT_NAME = flutter_pokemon_clean_architecture
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.flutterTemplate
+PRODUCT_BUNDLE_IDENTIFIER = dev.alextrs.flutter_pokemon_clean_architecture
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2022 com.example. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2022 dev.alextrs. All rights reserved.
