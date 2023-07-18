@@ -75,6 +75,11 @@ jobs:
         run: flutter pub get
       - name: Build release Bundle
         run: flutter build appbundle --release
+      - name: Upload Android Release artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: android-release
+          path: build/app/outputs/bundle/release/app-release.aab
 
   deploy:
     name: Deploy Android
@@ -91,6 +96,6 @@ jobs:
         with:
           serviceAccountJsonPlainText: ${{ secrets.PLAYSTORE_ACCOUNT_KEY }}
           packageName: dev.alextrs.flutter_pokemon_clean_architecture
-          releaseFiles: app/build/outputs/bundle/release/app-release.aab
+          releaseFiles: app-release.aab
           track: production
         
