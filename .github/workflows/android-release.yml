@@ -45,7 +45,7 @@ jobs:
         id: version
         uses: juliangruber/read-file-action@v1
         with:
-          path: version.txt
+          path: ./version.txt
       - name: Update version in pubspec.yaml
         run: sed -i "s/99.99.99+99/${{ steps.version.outputs.content }}+${{ github.run_number }}/g" pubspec.yaml
       - name: Download keystore
