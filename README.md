@@ -18,3 +18,4 @@ Flutter app using clean architecture and BLoC pattern.
 
 ## Folder Structure
 ![Image](folder_structure.webp)
+ 

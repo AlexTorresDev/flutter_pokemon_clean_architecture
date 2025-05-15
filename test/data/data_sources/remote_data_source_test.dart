@@ -1,11 +1,11 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_pokemon_clean_architecture/src/data/models/pokemon_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' show Response;
 import 'package:mockito/mockito.dart';
 import 'package:flutter_pokemon_clean_architecture/src/core/errors/exceptions.dart';
 import 'package:flutter_pokemon_clean_architecture/src/core/network/client_service.dart';
 import 'package:flutter_pokemon_clean_architecture/src/data/data_sources/remote_data_source.dart';
-import 'package:flutter_pokemon_clean_architecture/src/data/models/models.dart';
 
 class MockClientService extends Mock implements ClientService {
   @override

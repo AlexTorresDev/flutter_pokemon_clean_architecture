@@ -1,0 +1,2 @@
+D:/Proyectos/flutter_pokemon_clean_architecture/android/app/.cxx/Debug/4p4h6i24/x86/CMakeFiles/edit_cache.dir
+D:/Proyectos/flutter_pokemon_clean_architecture/android/app/.cxx/Debug/4p4h6i24/x86/CMakeFiles/rebuild_cache.dir

@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_pokemon_clean_architecture/src/presentation/blocs/blocs.dart';
 
 class DetailsPage extends StatefulWidget {
-  const DetailsPage({
-    Key? key,
-    required this.id,
-  }) : super(key: key);
+  const DetailsPage({super.key, required this.id});
 
   final String id;
 
@@ -17,34 +12,15 @@ class DetailsPage extends StatefulWidget {
 class _DetailsPageState extends State<DetailsPage> {
   @override
   void initState() {
-    context.read<DetailsCubit>().getByName(widget.id);
+    //context.read<DetailsCubit>().getByName(widget.id);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Details'),
-      ),
-      body: BlocBuilder<DetailsCubit, DetailsState>(
-        builder: (context, state) {
-          if (state is DetailsLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (state is DetailsHasData) {
-            final pokemon = state.pokemon;
-            return Text(pokemon.name!);
-          } else if (state is DetailsError) {
-            return Center(
-              child: Text('Error: ${state.message}'),
-            );
-          } else {
-            return const SizedBox.shrink();
-          }
-        },
-      ),
+      appBar: AppBar(title: const Text('Details')),
+      body: Container(),
     );
   }
 }

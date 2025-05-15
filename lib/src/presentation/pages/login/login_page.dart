@@ -3,9 +3,7 @@ import 'package:flutter_pokemon_clean_architecture/src/core/framework/utils/cons
 import 'package:go_router/go_router.dart';
 
 class LoginPage extends StatelessWidget {
-  LoginPage({
-    Key? key,
-  }) : super(key: key);
+  LoginPage({super.key});
 
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -20,16 +18,12 @@ class LoginPage extends StatelessWidget {
           children: [
             TextField(
               controller: _usernameController,
-              decoration: const InputDecoration(
-                labelText: 'Nombre de usuario',
-              ),
+              decoration: const InputDecoration(labelText: 'Nombre de usuario'),
             ),
             const SizedBox(height: kDefaultPadding),
             TextField(
               controller: _passwordController,
-              decoration: const InputDecoration(
-                labelText: 'Contraseña',
-              ),
+              decoration: const InputDecoration(labelText: 'Contraseña'),
               obscureText: true,
             ),
             const SizedBox(height: kDefaultPadding),

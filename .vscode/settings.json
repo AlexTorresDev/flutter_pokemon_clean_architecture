@@ -4,5 +4,6 @@
         "dartz",
         "rxdart",
         "sqflite"
-    ]
+    ],
+    "java.configuration.updateBuildConfiguration": "automatic"
 }

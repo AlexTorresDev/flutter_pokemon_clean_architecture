@@ -6,9 +6,9 @@ import 'package:flutter_pokemon_clean_architecture/src/domain/entities/pokemon.d
 
 class PokemonCard extends StatelessWidget {
   const PokemonCard({
-    Key? key,
+    super.key,
     required this.pokemon,
-  }) : super(key: key);
+  });
 
   final Pokemon pokemon;
 

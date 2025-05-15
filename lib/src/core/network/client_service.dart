@@ -15,8 +15,11 @@ class ClientService {
     );
   }
 
-  Future<Response> post(String? url,
-      {Map? headers, required Object body}) async {
+  Future<Response> post(
+    String? url, {
+    Map? headers,
+    required Object body,
+  }) async {
     final h = {...headers ?? {}};
 
     return await client.post(
