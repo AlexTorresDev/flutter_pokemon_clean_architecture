@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_pokemon_clean_architecture/src/core/errors/exceptions.dart';
 import 'package:flutter_pokemon_clean_architecture/src/core/network/client_service.dart';
-import 'package:flutter_pokemon_clean_architecture/src/data/models/pokemon_model.dart';
+import 'package:flutter_pokemon_clean_architecture/src/domain/models/pokemon.dart';
 
 abstract class RemoteDataSource {
   Future<List<PokemonModel>> getPokemonList(int limit, int offset);
@@ -10,9 +10,7 @@ abstract class RemoteDataSource {
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {
-  RemoteDataSourceImpl({
-    required this.client,
-  });
+  RemoteDataSourceImpl({required this.client});
 
   final ClientService client;
 

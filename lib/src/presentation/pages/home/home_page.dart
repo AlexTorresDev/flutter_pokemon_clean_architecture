@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pokemon_clean_architecture/src/presentation/providers/pokemon_provider.dart';
+import 'package:flutter_pokemon_clean_architecture/src/domain/models/pokemon.dart';
+import 'package:flutter_pokemon_clean_architecture/src/presentation/providers/pokemon/pokemon_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:flutter_pokemon_clean_architecture/src/domain/entities/pokemon.dart';
+
 import 'widgets/pokemon_card.dart';
 
 class HomePage extends ConsumerStatefulWidget {
@@ -15,9 +16,14 @@ class HomePage extends ConsumerStatefulWidget {
 class _HomePageState extends ConsumerState<HomePage> {
   static const _limit = 20;
 
-  late final _pagingController = PagingController<int, Pokemon>(
-    getNextPageKey: (state) => (state.keys?.last ?? 0) + _limit,
-    fetchPage: (pageKey) => ref.read(pokemonProvider),
+  late final _pagingController = PagingController<int, PokemonModel>(
+    getNextPageKey: (state) =>
+        (state.keys?.isEmpty ?? true) ? 0 : (state.keys!.last + _limit),
+    fetchPage: (pageKey) async => ref.read(
+      pokemonProvider(
+        PokemonQueryParams(limit: _limit, offset: pageKey),
+      ).future,
+    ),
   );
 
   @override
@@ -31,13 +37,13 @@ class _HomePageState extends ConsumerState<HomePage> {
       appBar: AppBar(title: const Text('Pokemon')),
       body: PagingListener(
         controller: _pagingController,
-        builder:
-            (context, state, fetchNextPage) => PagedListView<int, Pokemon>(
+        builder: (context, state, fetchNextPage) =>
+            PagedListView<int, PokemonModel>(
               state: state,
               fetchNextPage: fetchNextPage,
               builderDelegate: PagedChildBuilderDelegate(
-                itemBuilder:
-                    (context, item, index) => PokemonCard(pokemon: item),
+                itemBuilder: (context, item, index) =>
+                    PokemonCard(pokemon: item),
               ),
             ),
       ),

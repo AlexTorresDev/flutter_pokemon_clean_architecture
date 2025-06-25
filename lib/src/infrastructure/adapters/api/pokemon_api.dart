@@ -2,32 +2,29 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:flutter_pokemon_clean_architecture/src/core/errors/exceptions.dart';
-import 'package:flutter_pokemon_clean_architecture/src/core/params/pokemon_param.dart';
-import 'package:flutter_pokemon_clean_architecture/src/data/data_sources/local_data_source.dart';
-import 'package:flutter_pokemon_clean_architecture/src/data/data_sources/remote_data_source.dart';
-import 'package:flutter_pokemon_clean_architecture/src/domain/entities/pokemon.dart';
 import 'package:flutter_pokemon_clean_architecture/src/core/errors/failure.dart';
+import 'package:flutter_pokemon_clean_architecture/src/data/datasources/local_data_source.dart';
+import 'package:flutter_pokemon_clean_architecture/src/data/datasources/remote_data_source.dart';
 import 'package:flutter_pokemon_clean_architecture/src/domain/repositories/pokemon_repository.dart';
+import 'package:flutter_pokemon_clean_architecture/src/domain/models/pokemon.dart';
 
-class PokemonRepositoryImpl implements PokemonRepository {
-  PokemonRepositoryImpl({
-    required this.remoteDataSource,
-    required this.localDataSource,
-  });
+class PokemonApi implements PokemonGateway {
+  PokemonApi({required this.remoteDataSource, required this.localDataSource});
 
   final RemoteDataSource remoteDataSource;
   final LocalDataSource localDataSource;
 
   @override
-  Future<Either<Failure, List<Pokemon>>> getPokemonList(
-      PokemonParam params) async {
+  Future<Either<Failure, List<PokemonModel>>> getPokemonList(int limit, int offset) async {
     try {
       /*final localPokemonList =
           await localDataSource.getPokemonList(limit, offset);
 
       if (localPokemonList.isEmpty) {*/
-      final remotePokemonList =
-          await remoteDataSource.getPokemonList(params.limit, params.offset);
+      final remotePokemonList = await remoteDataSource.getPokemonList(
+        limit,
+        offset,
+      );
       // save pokemon list to local data source
       //localDataSource.savePokemonList(remotePokemonList);
       return Right(remotePokemonList);
@@ -46,7 +43,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
   }
 
   @override
-  Future<Either<Failure, List<Pokemon>>> getPokemon(String name) async {
+  Future<Either<Failure, List<PokemonModel>>> getPokemon(String name) async {
     /*try {
       final localPokemon = await localDataSource.getPokemon(name);
 

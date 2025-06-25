@@ -1,16 +1,16 @@
-import 'package:flutter_pokemon_clean_architecture/src/domain/entities/sprite.dart';
+import 'package:equatable/equatable.dart';
 
-class SpriteModel extends Sprite {
+class SpriteModel extends Equatable {
   const SpriteModel({
-    super.backDefault,
-    super.backFemale,
-    super.backShiny,
-    String? backShinyFemale,
-    super.frontDefault,
-    super.frontFemale,
-    super.frontShiny,
-    super.frontShinyFemale,
-  }) : super(backShinyFemale: backShiny);
+    this.backDefault,
+    this.backFemale,
+    this.backShiny,
+    this.backShinyFemale,
+    this.frontDefault,
+    this.frontFemale,
+    this.frontShiny,
+    this.frontShinyFemale,
+  });
 
   factory SpriteModel.fromJson(Map<String, dynamic> json) => SpriteModel(
     backDefault: json["back_default"],
@@ -23,6 +23,15 @@ class SpriteModel extends Sprite {
     frontShinyFemale: json["front_shiny_female"],
   );
 
+  final String? backDefault;
+  final String? backFemale;
+  final String? backShiny;
+  final String? backShinyFemale;
+  final String? frontDefault;
+  final String? frontFemale;
+  final String? frontShiny;
+  final String? frontShinyFemale;
+
   Map<String, dynamic> toJson() => {
     "back_default": backDefault,
     "back_female": backFemale,
@@ -33,4 +42,16 @@ class SpriteModel extends Sprite {
     "front_shiny": frontShiny,
     "front_shiny_female": frontShinyFemale,
   };
+
+  @override
+  List<Object?> get props => [
+    backDefault,
+    backFemale,
+    backShiny,
+    backShinyFemale,
+    frontDefault,
+    frontFemale,
+    frontShiny,
+    frontShinyFemale,
+  ];
 }

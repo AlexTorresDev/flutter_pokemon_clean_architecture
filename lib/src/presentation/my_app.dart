@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter_pokemon_clean_architecture/l10n/app_localizations.dart';
-import 'package:flutter_pokemon_clean_architecture/src/core/framework/router/router.dart';
-import 'package:flutter_pokemon_clean_architecture/src/core/framework/themes.dart';
+import 'package:flutter_pokemon_clean_architecture/src/config/router/router.dart';
+import 'package:flutter_pokemon_clean_architecture/src/config/themes.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

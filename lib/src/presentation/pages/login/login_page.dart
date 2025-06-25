@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pokemon_clean_architecture/src/core/framework/utils/constants.dart';
+import 'package:flutter_pokemon_clean_architecture/src/config/utils/constants.dart';
 import 'package:go_router/go_router.dart';
 
 class LoginPage extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter_pokemon_clean_architecture/src/core/connections/db_provider.dart';
-import 'package:flutter_pokemon_clean_architecture/src/data/models/pokemon_model.dart';
+import 'package:flutter_pokemon_clean_architecture/src/domain/models/pokemon.dart';
 import 'package:sqflite/sqflite.dart';
 
 abstract class LocalDataSource {
@@ -9,9 +9,7 @@ abstract class LocalDataSource {
 }
 
 class LocalDataSourceImpl implements LocalDataSource {
-  LocalDataSourceImpl({
-    required this.dbProvider,
-  });
+  LocalDataSourceImpl({required this.dbProvider});
 
   final DBProvider? dbProvider;
 

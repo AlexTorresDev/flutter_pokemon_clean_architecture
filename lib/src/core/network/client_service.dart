@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' show Client, Response;
-import 'package:flutter_pokemon_clean_architecture/src/core/framework/utils/constants.dart';
+import 'package:flutter_pokemon_clean_architecture/src/config/utils/constants.dart';
 
 class ClientService {
   ClientService();
