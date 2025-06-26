@@ -3,7 +3,6 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:material_color_utilities/material_color_utilities.dart';
 
 Future<ColorScheme?> getColorSchemeFromImage(ImageProvider provider) async {
