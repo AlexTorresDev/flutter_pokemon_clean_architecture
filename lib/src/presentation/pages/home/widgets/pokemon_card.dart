@@ -1,6 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_pokemon_clean_architecture/src/config/utils/images.dart';
 import 'package:flutter_pokemon_clean_architecture/src/domain/models/pokemon.dart';
-import 'package:palette_generator/palette_generator.dart';
 import 'package:go_router/go_router.dart';
 
 class PokemonCard extends StatelessWidget {
@@ -27,7 +29,7 @@ class PokemonCard extends StatelessWidget {
     return FutureBuilder<Color>(
       future: _getImagePalette(image.image),
       builder: (_, snapshot) {
-        final bgColor = (snapshot.data ?? Colors.black26).withAlpha(150);
+        final bgColor = (snapshot.data ?? Colors.black26);
 
         return ClipRRect(
           borderRadius: BorderRadius.circular(30),
@@ -40,15 +42,15 @@ class PokemonCard extends StatelessWidget {
               clipBehavior: Clip.antiAliasWithSaveLayer,
               elevation: 2,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(6),
+                borderRadius: BorderRadius.circular(10),
               ),
               child: Stack(
                 clipBehavior: Clip.antiAliasWithSaveLayer,
                 fit: StackFit.loose,
                 children: [
                   Positioned(
-                    bottom: -20,
-                    right: -20,
+                    bottom: -10,
+                    right: -10,
                     child: Transform.rotate(angle: -0.1, child: image),
                   ),
                   Positioned(
@@ -58,19 +60,19 @@ class PokemonCard extends StatelessWidget {
                     width: 6,
                     child: Container(color: bgColor),
                   ),
-                  /*BackdropFilter(
-                      filter: ImageFilter.blur(
-                        sigmaX: 0.0,
-                        sigmaY: 0.0,
-                        tileMode: TileMode.mirror,
-                      ),
-                      child: Container(
-                        margin: const EdgeInsets.only(left: 6),
-                        width: double.infinity - 5,
-                        height: 120,
-                        color: bgColor.withOpacity(0.1),
-                      ),
-                    ),*/
+                  BackdropFilter(
+                    filter: ImageFilter.blur(
+                      sigmaX: 0.0,
+                      sigmaY: 0.0,
+                      tileMode: TileMode.mirror,
+                    ),
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 6),
+                      width: double.infinity - 5,
+                      height: 160,
+                      color: bgColor.withValues(alpha: 0.1),
+                    ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 20.0,
@@ -119,10 +121,7 @@ class PokemonCard extends StatelessWidget {
 
   // Calculate dominant color from ImageProvider
   Future<Color> _getImagePalette(ImageProvider? imageProvider) async {
-    final paletteGenerator = await PaletteGenerator.fromImageProvider(
-      imageProvider!,
-    );
-
-    return paletteGenerator.dominantColor?.color ?? Colors.black26;
+    final colorScheme = await getColorSchemeFromImage(imageProvider!);
+    return colorScheme?.primary ?? Colors.transparent;
   }
 }

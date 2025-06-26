@@ -12,7 +12,7 @@ class DBProvider {
 
   Future<Database?> get database async => _database ??= await _init();
 
-  _init() async {
+  Future<Database> _init() async {
     return await openDatabase(
       join(await getDatabasesPath(), 'pokemon_database.db'),
       onCreate: (db, _) {
