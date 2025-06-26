@@ -26,7 +26,17 @@ class DBProvider {
             base_experience INTEGER,
             is_default INTEGER,
             location_area_encounters TEXT
-          )
+          );
+          ''');
+        db.execute('''
+          CREATE TABLE IF NOT EXISTS sprites(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            pokemon_id INTEGER,
+            type TEXT,
+            key TEXT,
+            value TEXT,
+            FOREIGN KEY(pokemon_id) REFERENCES pokemon(id)
+          );
           ''');
       },
       version: 2,

@@ -17,3 +17,14 @@ final pokemonProvider = FutureProvider.autoDispose
             (value) => value.fold((l) => throw Exception(l.message), (r) => r),
           ),
     );
+
+final pokemonByNameProvider = FutureProvider.autoDispose
+    .family<PokemonModel, String>(
+      (ref, name) => ref
+          .watch(pokemonUseCaseProvider)
+          .getByName(name)
+          .then(
+            (value) =>
+                value.fold((l) => throw Exception(l.message), (r) => r[0]),
+          ),
+    );

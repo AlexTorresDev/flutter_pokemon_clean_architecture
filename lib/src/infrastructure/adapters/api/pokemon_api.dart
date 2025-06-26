@@ -15,26 +15,30 @@ class PokemonApi implements PokemonGateway {
   final LocalDataSource localDataSource;
 
   @override
-  Future<Either<Failure, List<PokemonModel>>> getPokemonList(int limit, int offset) async {
+  Future<Either<Failure, List<PokemonModel>>> getPokemonList(
+    int limit,
+    int offset,
+  ) async {
     try {
-      /*final localPokemonList =
-          await localDataSource.getPokemonList(limit, offset);
-
-      if (localPokemonList.isEmpty) {*/
-      final remotePokemonList = await remoteDataSource.getPokemonList(
+      final localPokemonList = await localDataSource.getPokemonList(
         limit,
         offset,
       );
-      // save pokemon list to local data source
-      //localDataSource.savePokemonList(remotePokemonList);
-      return Right(remotePokemonList);
-      /*} else {
+
+      if (localPokemonList.isNotEmpty) {
         return Right(localPokemonList);
+      } else {
+        final remotePokemonList = await remoteDataSource.getPokemonList(
+          limit,
+          offset,
+        );
+        localDataSource.savePokemonList(remotePokemonList);
+        return Right(remotePokemonList);
       }
     } on CacheException {
       return const Left(
         DatabaseFailure('Failed to get pokemon list from cache'),
-      );*/
+      );
     } on ServerException {
       return const Left(ServerFailure('Failed to get pokemon list'));
     } on SocketException {
@@ -44,26 +48,22 @@ class PokemonApi implements PokemonGateway {
 
   @override
   Future<Either<Failure, List<PokemonModel>>> getPokemon(String name) async {
-    /*try {
+    try {
       final localPokemon = await localDataSource.getPokemon(name);
 
-      if (localPokemon.isEmpty) {*/
-    try {
-      final remotePokemon = await remoteDataSource.getPokemon(name);
-      //localDataSource.savePokemonList(remotePokemon);
-      return Right(remotePokemon);
+      if (localPokemon.isNotEmpty) {
+        return Right(localPokemon);
+      } else {
+        final remotePokemon = await remoteDataSource.getPokemon(name);
+        localDataSource.savePokemonList(remotePokemon);
+        return Right(remotePokemon);
+      }
+    } on CacheException {
+      return const Left(DatabaseFailure('Failed to get pokemon from cache'));
     } on ServerException {
       return const Left(ServerFailure('No data found'));
     } on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
     }
-    /*} else {
-        return Right(localPokemon);
-      }
-    } on CacheException {
-      return const Left(
-        DatabaseFailure('Failed to get pokemon from cache'),
-      );
-    }*/
   }
 }

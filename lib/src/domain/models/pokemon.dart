@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter_pokemon_clean_architecture/src/config/utils/sprites.dart';
 import 'package:flutter_pokemon_clean_architecture/src/domain/models/sprite.dart';
 
 class PokemonModel extends Equatable {
@@ -14,21 +15,23 @@ class PokemonModel extends Equatable {
     required this.sprites,
   });
 
-  factory PokemonModel.fromJson(Map<String, dynamic> json) => PokemonModel(
-    baseExperience: json["base_experience"],
-    height: json["height"],
-    id: json["id"],
-    isDefault: json["is_default"] is int
-        ? json["is_default"] == 1
-        : json["is_default"],
-    locationAreaEncounters: json["location_area_encounters"],
-    name: json["name"],
-    order: json["order"] ?? json["sort_order"],
-    weight: json["weight"],
-    sprites: json["sprites"] != null
-        ? SpriteModel.fromJson(json["sprites"])
-        : null,
-  );
+  factory PokemonModel.fromJson(Map<String, dynamic> json) {
+    return PokemonModel(
+      baseExperience: json["base_experience"],
+      height: json["height"],
+      id: json["id"],
+      isDefault: json["is_default"] is int
+          ? json["is_default"] == 1
+          : json["is_default"],
+      locationAreaEncounters: json["location_area_encounters"],
+      name: json["name"],
+      order: json["order"] ?? json["sort_order"],
+      weight: json["weight"],
+      sprites: json['sprites'] is Map<String, dynamic>
+          ? flattenSprites(json['sprites'])
+          : <SpriteModel>[],
+    );
+  }
 
   final int? baseExperience;
   final int? height;
@@ -38,7 +41,7 @@ class PokemonModel extends Equatable {
   final String? name;
   final int? order;
   final int? weight;
-  final SpriteModel? sprites;
+  final List<SpriteModel> sprites;
 
   Map<String, dynamic> toJson() => {
     "base_experience": baseExperience,
@@ -49,7 +52,7 @@ class PokemonModel extends Equatable {
     "name": name,
     "sort_order": order,
     "weight": weight,
-    "sprites": (sprites as List<SpriteModel>).map((e) => e.toJson()).toList(),
+    "sprites": sprites.map((s) => s.toJson()).toList(),
   };
 
   @override

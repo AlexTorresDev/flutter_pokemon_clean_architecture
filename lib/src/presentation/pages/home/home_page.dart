@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pokemon_clean_architecture/src/domain/models/pokemon.dart';
-import 'package:flutter_pokemon_clean_architecture/src/presentation/providers/pokemon/pokemon_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+
+import 'package:flutter_pokemon_clean_architecture/src/domain/models/pokemon.dart';
+import 'package:flutter_pokemon_clean_architecture/src/presentation/pages/home/widgets/pokemon_card_skeleton.dart';
+import 'package:flutter_pokemon_clean_architecture/src/presentation/providers/pokemon/pokemon_provider.dart';
 
 import 'widgets/pokemon_card.dart';
 
@@ -44,6 +46,14 @@ class _HomePageState extends ConsumerState<HomePage> {
               builderDelegate: PagedChildBuilderDelegate(
                 itemBuilder: (context, item, index) =>
                     PokemonCard(pokemon: item),
+                firstPageProgressIndicatorBuilder: (context) => Column(
+                  children: List.generate(
+                    6,
+                    (_) => const PokemonCardSkeleton(),
+                  ),
+                ),
+                newPageProgressIndicatorBuilder: (context) =>
+                    const PokemonCardSkeleton(),
               ),
             ),
       ),

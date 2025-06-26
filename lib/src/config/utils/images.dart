@@ -1,14 +1,26 @@
 import 'dart:async';
-import 'dart:typed_data';
+import 'dart:io';
 import 'dart:ui' as ui;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:material_color_utilities/material_color_utilities.dart';
 
-Future<ColorScheme?> getColorSchemeFromImage(ImageProvider provider) async {
+Future<List<Color>> getColorSchemeFromImage(File file) async {
+  final bytes = await file.readAsBytes();
+  final PictureInfo pictureInfo = await vg.loadPicture(
+    SvgBytesLoader(bytes),
+    null,
+  );
+  final ui.Image image = await pictureInfo.picture.toImage(120, 120);
+  final imageProvider = _UiImageProvider(image);
+
   try {
     // Extract dominant colors from image.
-    final quantizerResult = await _extractColorsFromImageProvider(provider);
+    final quantizerResult = await _extractColorsFromImageProvider(
+      imageProvider,
+    );
     final Map<int, int> colorToCount = quantizerResult.colorToCount.map(
       (key, value) => MapEntry<int, int>(_getArgbFromAbgr(key), value),
     );
@@ -29,10 +41,10 @@ Future<ColorScheme?> getColorSchemeFromImage(ImageProvider provider) async {
       ...scoredResults,
     }.toList().map((argb) => Color(argb)).toList();
 
-    return ColorScheme.fromSeed(seedColor: colors[0]);
+    return colors;
   } catch (e) {
     debugPrint('Error getting colors from image: $e');
-    return null;
+    return [];
   }
 }
 
@@ -128,4 +140,29 @@ int _getArgbFromAbgr(int abgr) {
   final int r = (abgr & onlyRMask) >> 16;
   final int b = abgr & onlyBMask;
   return (abgr & exceptRMask & exceptBMask) | (b << 16) | r;
+}
+
+class _UiImageProvider extends ImageProvider<_UiImageProvider> {
+  _UiImageProvider(this.image);
+  final ui.Image image;
+
+  @override
+  Future<_UiImageProvider> obtainKey(ImageConfiguration configuration) =>
+      SynchronousFuture<_UiImageProvider>(this);
+
+  @override
+  ImageStreamCompleter loadImage(
+    _UiImageProvider key,
+    ImageDecoderCallback decode,
+  ) {
+    return OneFrameImageStreamCompleter(Future.value(ImageInfo(image: image)));
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is _UiImageProvider && image == other.image;
+
+  @override
+  int get hashCode => image.hashCode;
 }

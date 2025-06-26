@@ -11,6 +11,6 @@ class PokemonUsecase {
   Future<Either<Failure, List<PokemonModel>>> getAll(int limit, int offset) =>
       _pokemonGateway.getPokemonList(limit, offset);
 
-  Future<Either<Failure, List<PokemonModel>>> getById(String name) =>
+  Future<Either<Failure, List<PokemonModel>>> getByName(String name) =>
       _pokemonGateway.getPokemon(name);
 }

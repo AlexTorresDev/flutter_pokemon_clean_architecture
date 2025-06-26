@@ -1,5 +1,6 @@
 import 'package:flutter_pokemon_clean_architecture/src/core/connections/db_provider.dart';
 import 'package:flutter_pokemon_clean_architecture/src/domain/models/pokemon.dart';
+import 'package:flutter_pokemon_clean_architecture/src/domain/models/sprite.dart';
 import 'package:sqflite/sqflite.dart';
 
 abstract class LocalDataSource {
@@ -16,29 +17,24 @@ class LocalDataSourceImpl implements LocalDataSource {
   @override
   Future<List<PokemonModel>> getPokemonList(int limit, int offset) async {
     final database = await dbProvider!.database;
-    final maps = await database!.query('pokemon', limit: limit, offset: offset);
-
-    if (maps.isNotEmpty) {
-      return maps.map((e) => PokemonModel.fromJson(e)).toList();
-    } else {
-      return Future.value([]);
-    }
+    final pokemons = await database!.query(
+      'pokemon',
+      limit: limit,
+      offset: offset,
+    );
+    return _getPokemonsWithSprites(database, pokemons);
   }
 
   @override
   Future<List<PokemonModel>> getPokemon(String name) async {
     final database = await dbProvider!.database;
-    final maps = await database!.query(
+    final pokemons = await database!.query(
       'pokemon',
       where: 'name LIKE ?',
       whereArgs: ['%$name%'],
     );
 
-    if (maps.isNotEmpty) {
-      return maps.map((e) => PokemonModel.fromJson(e)).toList();
-    } else {
-      return Future.value([]);
-    }
+    return _getPokemonsWithSprites(database, pokemons);
   }
 
   @override
@@ -48,9 +44,53 @@ class LocalDataSourceImpl implements LocalDataSource {
     for (final pokemon in pokemonList) {
       await database!.insert(
         'pokemon',
-        pokemon.toJson(),
+        pokemon.toJson()..remove('sprites'),
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
+
+      await database.delete(
+        'sprites',
+        where: 'pokemon_id = ?',
+        whereArgs: [pokemon.id],
+      );
+
+      for (final sprite in pokemon.sprites) {
+        await database.insert('sprites', {
+          'pokemon_id': pokemon.id,
+          'type': sprite.type,
+          'key': sprite.key,
+          'value': sprite.value,
+        }, conflictAlgorithm: ConflictAlgorithm.replace);
+      }
     }
+  }
+
+  Future<List<PokemonModel>> _getPokemonsWithSprites(
+    Database database,
+    List<Map<String, dynamic>> pokemons,
+  ) async {
+    List<PokemonModel> pokemonsWithSprites = [];
+
+    for (final pokemon in pokemons) {
+      final sprites = await database.query(
+        'sprites',
+        where: 'pokemon_id = ?',
+        whereArgs: [pokemon['id']],
+      );
+      final spritesList = sprites
+          .map(
+            (e) => SpriteModel.fromJson({
+              'type': e['type'],
+              'key': e['key'],
+              'value': e['value'],
+            }),
+          )
+          .toList();
+
+      pokemonsWithSprites.add(
+        PokemonModel.fromJson({...pokemon, 'sprites': spritesList}),
+      );
+    }
+    return pokemonsWithSprites;
   }
 }
