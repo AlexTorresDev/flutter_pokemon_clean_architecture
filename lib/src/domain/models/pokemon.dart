@@ -29,7 +29,7 @@ class PokemonModel extends Equatable {
       weight: json["weight"],
       sprites: json['sprites'] is Map<String, dynamic>
           ? flattenSprites(json['sprites'])
-          : <SpriteModel>[],
+          : json['sprites'],
     );
   }
 

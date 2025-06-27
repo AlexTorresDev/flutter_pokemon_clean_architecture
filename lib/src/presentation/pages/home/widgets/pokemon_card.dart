@@ -37,7 +37,7 @@ class PokemonCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(30),
           child: GestureDetector(
             onTap: () {
-              context.go('/details/${pokemon.name}');
+              context.push('/details/${pokemon.name}');
             },
             child: Card(
               margin: const EdgeInsets.all(6),

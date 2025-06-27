@@ -5,22 +5,18 @@ List<SpriteModel> flattenSprites(
   String type = 'base',
 }) {
   final List<SpriteModel> result = [];
-  sprites.forEach((key, value) {
-    if (value != null) {
-      if (value is Map<String, dynamic>) {
-        if (key == 'other' || key == 'versions') {
-          value.forEach((subType, subValue) {
-            if (subValue is Map<String, dynamic>) {
-              result.addAll(flattenSprites(subValue, type: subType));
-            }
-          });
-        } else {
-          result.addAll(flattenSprites(value, type: key));
-        }
-      } else {
-        result.add(SpriteModel(type: type, key: key, value: value?.toString()));
+  if (sprites.containsKey('other')) {
+    final other = sprites['other'] as Map<String, dynamic>;
+    for (final key in ['home', 'official-artwork']) {
+      if (other.containsKey(key)) {
+        final subSprites = other[key] as Map<String, dynamic>;
+        subSprites.forEach((spriteKey, value) {
+          if (value != null && value is String && value.isNotEmpty) {
+            result.add(SpriteModel(type: key, key: spriteKey, value: value));
+          }
+        });
       }
     }
-  });
+  }
   return result;
 }

@@ -29,11 +29,6 @@ class _HomePageState extends ConsumerState<HomePage> {
   );
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Pokemon')),
