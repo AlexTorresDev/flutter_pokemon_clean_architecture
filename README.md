@@ -20,73 +20,74 @@ Flutter app using clean architecture and BLoC pattern.
 ```
 └── 📁lib
     └── 📁l10n
-        └── app_localizations_en.dart
-        └── app_localizations_es.dart
-        └── app_localizations.dart
-        └── intl_en.arb
-        └── intl_es.arb
+        ├── app_localizations_en.dart
+        ├── app_localizations_es.dart
+        ├── app_localizations.dart
+        ├── intl_en.arb
+        ├── intl_es.arb
     └── 📁src
+        └── 📁config
+            └── 📁router
+                ├── router.dart
+            └── 📁utils
+                ├── constants.dart
+                ├── custom_shape_border.dart
+                ├── images.dart
+                ├── sprites.dart
+            ├── themes.dart
         └── 📁core
             └── 📁connections
-                └── db_provider.dart
-                └── network_connectivity.dart
+                ├── db_provider.dart
+                ├── network_connectivity.dart
             └── 📁errors
-                └── exceptions.dart
-                └── failure.dart
-            └── 📁framework
-                └── 📁router
-                    └── router.dart
-                └── themes.dart
-                └── 📁utils
-                    └── constants.dart
-                    └── custom_shape_border.dart
-                    └── utils.dart
+                ├── exceptions.dart
+                ├── failure.dart
             └── 📁network
-                └── client_service.dart
-            └── 📁params
-                └── pokemon_param.dart
-            └── use_case.dart
+                ├── client_service.dart
+            ├── providers.dart
         └── 📁data
-            └── 📁data_sources
-                └── local_data_source.dart
-                └── remote_data_source.dart
+            └── 📁datasources
+                ├── local_data_source.dart
+                ├── remote_data_source.dart
+            ├── providers.dart
         └── 📁domain
             └── 📁models
-                └── 📁pokemon
-                    └── 📁gateway
-                        └── pokemon_gateway.dart
-                    └── pokemon.dart
-                └── 📁sprite
-                    └── 📁gateway
-                        └── sprite_gateway.dart
-                    └── sprite.dart
+                ├── pokemon.dart
+                ├── sprite.dart
+            └── 📁repositories
+                ├── pokemon_repository.dart
             └── 📁usecases
                 └── 📁pokemon
-                    └── pokemon_use_case.dart
+                    ├── pokemon_use_case.dart
+            ├── providers.dart
         └── 📁infrastructure
-            └── 📁driver-adapter
+            └── 📁adapters
                 └── 📁api
-                    └── pokemon_api.dart
+                    ├── pokemon_api.dart
                 └── 📁firebase
-                    └── pokemon_firebase.dart
+                    ├── pokemon_firebase.dart
         └── 📁presentation
-            └── my_app.dart
             └── 📁pages
                 └── 📁details
-                    └── details_page.dart
-                └── 📁error
-                    └── error_page.dart
-                └── 📁home
-                    └── home_page.dart
                     └── 📁widgets
-                        └── pokemon_card.dart
+                        ├── body.dart
+                    ├── details_page.dart
+                └── 📁error
+                    ├── error_page.dart
+                └── 📁home
+                    └── 📁widgets
+                        ├── pokemon_card_skeleton.dart
+                        ├── pokemon_card.dart
+                    ├── home_page.dart
                 └── 📁login
-                    └── login_page.dart
+                    ├── login_page.dart
             └── 📁providers
-                └── pokemon_provider.dart
+                └── 📁pokemon
+                    ├── pokemon_provider.dart
             └── 📁widgets
-                └── connection_status.dart
-                └── loading.dart
+                ├── connection_status.dart
+                ├── loading.dart
+            ├── my_app.dart
     └── main.dart
 ```
  
