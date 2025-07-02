@@ -7,8 +7,7 @@ Flutter app using clean architecture and BLoC pattern.
 - Clean Architecture
 - sqflite
 - go_route
-- GetIt
-- BLoC
+- Flutter Riverpod
 - Mockito test
 - [PokeApi](https://pokeapi.co/)
 
